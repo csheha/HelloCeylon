@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "./App.css"; // Import your CSS file
+import "./App.css";
 
 function App() {
   const [input, setInput] = useState("");
@@ -18,18 +18,40 @@ function App() {
     setMessages((prev) => [...prev, { from: "user", text: userMessage }]);
 
     try {
+      console.log("Sending request to backend:", { message: userMessage });
+
       const res = await axios.post("http://localhost:5000/api/chat", {
         message: userMessage,
       });
+
+      console.log("Full response received:", res);
+      console.log("Response data:", res.data);
+      console.log("Response data.answer:", res.data.answer);
+
       const botReply = res.data.answer;
+
+      if (!botReply) {
+        console.error("No answer in response data:", res.data);
+        throw new Error("No answer received from bot");
+      }
 
       // Add bot reply to chat
       setMessages((prev) => [...prev, { from: "bot", text: botReply }]);
     } catch (err) {
-      console.error(err);
+      console.error("Full error object:", err);
+      console.error("Error response:", err.response);
+      console.error("Error data:", err.response?.data);
+
       setMessages((prev) => [
         ...prev,
-        { from: "bot", text: "Error: Could not get response from bot." },
+        {
+          from: "bot",
+          text: `Error: ${
+            err.response?.data?.answer ||
+            err.message ||
+            "Could not get response from bot."
+          }`,
+        },
       ]);
     } finally {
       setIsLoading(false);
