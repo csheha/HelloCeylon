@@ -1,0 +1,49 @@
+services:
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: mern_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: always
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: mern_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/chatbot
+      - CHATBOT_URL=http://chatbot:8000/chat
+    depends_on:
+      - mongodb
+      - chatbot
+    restart: always
+
+  chatbot:
+    build:
+      context: ../chatbot
+      dockerfile: Dockerfile
+    container_name: python_chatbot
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../chatbot/.env
+    restart: always
+
+  mongodb:
+    image: mongo:7
+    container_name: chatbot_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:
