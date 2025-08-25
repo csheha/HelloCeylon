@@ -11,11 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
+
+// MongoDB connection
+const mongoURL = process.env.MONGO_URL || "mongodb://mongodb:27017/chatbot";
+
 mongoose
-  .connect("mongodb://localhost:27017/chatbot", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoURL)
   .then(() => console.log("✅ MongoDB connected successfully!"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 

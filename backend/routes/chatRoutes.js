@@ -15,7 +15,7 @@ router.post("/", verifyFirebaseToken, async (req, res) => {
 
   try {
     // Send to Python service
-    const response = await axios.post("http://localhost:8000/chat", {
+    const response = await axios.post(process.env.CHATBOT_URL, {
       message: userMessage,
     });
 

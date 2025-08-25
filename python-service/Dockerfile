@@ -2,7 +2,7 @@
 FROM python:3.13-slim
 
 # Set working directory inside container
-WORKDIR /app
+WORKDIR /python-service
 
 # Copy requirements first (for caching)
 COPY requirements.txt .
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8000
 
 # Run FastAPI with Uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "chatbot:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
