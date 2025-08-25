@@ -31,6 +31,9 @@ model = genai.GenerativeModel(
     ),
 )
 
+# Store chat history in memory (per session/ can use DB later)
+conversation_history = []
+
 print("🤖 Chatbot service started on http://localhost:8000")
 
 @app.post("/chat")
@@ -41,16 +44,24 @@ async def chat(request: Request):
     if not user_input:
         return {"answer": "Please type a message."}
     if user_input.lower() == "quit":
+        conversation_history.clear()
         return {"answer": "Goodbye! Have a great day!"}
 
-    # Generate response
-    response = model.generate_content(user_input)
+    # Add user message to conversation
+    conversation_history.append({"role": "user", "parts": [{"text": user_input}]})
 
-    # Parse JSON returned by the model
+    # Generate response with full history
+    response = model.generate_content(conversation_history)
+
+    # Add model reply to history
+    reply_text = response.text
+    conversation_history.append({"role": "model", "parts": [{"text": reply_text}]})
+
+    # Parse JSON if needed, otherwise return plain text
     try:
-        reply_json = json.loads(response.text)
-        answer = reply_json.get("answer", "Sorry, I could not generate a response.")
+        reply_json = json.loads(reply_text)
+        answer = reply_json.get("answer", reply_text)
     except json.JSONDecodeError:
-        answer = response.text  
+        answer = reply_text
 
-    return {"answer": answer} 
+    return {"answer": answer}
