@@ -6,12 +6,12 @@
 *.user
 *.suo
 
+# Ignore logs
+*.log
+
 # Ignore OS generated files
 .DS_Store
 Thumbs.db
-
-# Ignore logs
-*.log
 
 # Ignore environment files
 .env
@@ -19,6 +19,6 @@ Thumbs.db
 # Ignore node_modules (if using Node.js)
 node_modules/
 
-# Ignore Python cache
-__pycache__/
-*.pyc
+# Ignore  file
+serviceAccountKey.json
+
