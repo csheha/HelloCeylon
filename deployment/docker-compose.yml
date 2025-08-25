@@ -27,13 +27,13 @@ services:
 
   chatbot:
     build:
-      context: ../chatbot
+      context: ../python-service
       dockerfile: Dockerfile
     container_name: python_chatbot
     ports:
       - "8000:8000"
     env_file:
-      - ../chatbot/.env
+      - ../python-service/.env
     restart: always
 
   mongodb:

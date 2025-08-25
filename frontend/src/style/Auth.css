@@ -4,7 +4,11 @@
 /* Auth Container */
 .auth-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #f0f9ff 100%);
+  background: url("../../public/images/Auth.png") center center / cover
+      no-repeat,
+    linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #f0f9ff 100%);
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,6 +44,7 @@
   animation: float 20s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* black overlay with 50% opacity */
 }
 
 /* Floating Background Icons */
@@ -62,8 +67,11 @@
 }
 
 /* Auth Card */
+
 .auth-card {
-  background: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+  background: transparent;
   backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 40px;
@@ -103,7 +111,7 @@
 
 .auth-subtitle {
   text-align: center;
-  color: #6b7280;
+  color: #ffffff;
   font-size: 0.95rem;
   margin-bottom: 32px;
   font-weight: 400;
@@ -326,7 +334,7 @@
 /* Links */
 .auth-link {
   text-align: center;
-  color: #6b7280;
+  color: #ffffff;
   font-size: 0.95rem;
   margin: 24px 0 0;
 }

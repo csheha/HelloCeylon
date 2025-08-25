@@ -4,7 +4,10 @@
 /* Home Container */
 .home-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #f0f9ff 100%);
+  background: url("../../public/images/homebg.jpeg") center center / cover
+      no-repeat,
+    linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #f0f9ff 100%);
+  position: relative;
   position: relative;
   overflow: hidden;
   font-family: "Inter", sans-serif;
@@ -36,6 +39,7 @@
   animation: float 20s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
+  background-color: rgba(0, 0, 0, 0.1); /* black overlay with 50% opacity */
 }
 
 /* Floating Background Icons */
@@ -177,6 +181,8 @@
   min-height: calc(100vh - 120px);
   position: relative;
   z-index: 5;
+  position: relative;
+  z-index: 1;
 }
 
 .chatbot-wrapper {
