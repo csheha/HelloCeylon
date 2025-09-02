@@ -110,23 +110,21 @@ function Chatbot() {
         <p className="chatbot-subtitle">Your personal travel guide</p>
       </div>
 
-      {messages.length === 0 && (
-        <div className="quick-actions-container">
-          <p className="quick-actions-title">Popular questions:</p>
-          <div className="quick-actions">
-            {quickActions.map((action, index) => (
-              <button
-                key={index}
-                className="quick-action-btn"
-                onClick={() => handleQuickAction(action)}
-                disabled={isLoading}
-              >
-                {action}
-              </button>
-            ))}
-          </div>
+      <div className="quick-actions-container">
+        <p className="quick-actions-title">Popular questions:</p>
+        <div className="quick-actions">
+          {quickActions.map((action, index) => (
+            <button
+              key={index}
+              className="quick-action-btn"
+              onClick={() => handleQuickAction(action)}
+              disabled={isLoading}
+            >
+              {action}
+            </button>
+          ))}
         </div>
-      )}
+      </div>
 
       <div className="chat-box" ref={chatBoxRef}>
         {messages.length === 0 ? (
