@@ -4,11 +4,11 @@ services:
       context: ../frontend
       dockerfile: Dockerfile
     container_name: helloceylon_frontend
-    ports:
-      - "3000:80"
     depends_on:
       - backend
     restart: always
+    networks:
+      - app-network
 
   backend:
     build:
@@ -24,6 +24,8 @@ services:
       - mongodb
       - chatbot
     restart: always
+    networks:
+      - app-network
 
   chatbot:
     build:
@@ -35,6 +37,19 @@ services:
     env_file:
       - ../python-service/.env
     restart: always
+    networks:
+      - app-network
+
+  nginx:
+    build: ../nginx
+    container_name: helloceylon_nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
 
   mongodb:
     image: mongo:7
@@ -44,6 +59,12 @@ services:
     volumes:
       - mongo_data:/data/db
     restart: always
+    networks:
+      - app-network
 
 volumes:
   mongo_data:
+
+networks:
+  app-network:
+    driver: bridge

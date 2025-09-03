@@ -21,7 +21,7 @@ mongoose
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Routes
-app.use("/api/chat", chatRoutes);
+app.use("/chat", chatRoutes);
 
 // Health check
 app.get("/health", (req, res) => {

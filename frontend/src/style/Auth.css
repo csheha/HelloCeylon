@@ -491,7 +491,7 @@
   .auth-input,
   .auth-button,
   .google-button {
-    padding: 14px 18px;
+    padding: 14px 4px;
     font-size: 0.95rem;
   }
 }
@@ -515,7 +515,7 @@
   .auth-input,
   .auth-button,
   .google-button {
-    padding: 12px 16px;
+    padding: 12px 5px;
     font-size: 0.9rem;
   }
 

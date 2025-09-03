@@ -60,7 +60,7 @@ function Chatbot() {
 
       // Send message to Node backend with Authorization header
       const res = await axios.post(
-        "http://localhost:5000/api/chat",
+        "/api/chat",
         { message: userMessage },
         {
           headers: { Authorization: `Bearer ${token}` },
