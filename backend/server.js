@@ -13,7 +13,7 @@ app.use(express.json());
 // MongoDB connection
 
 // MongoDB connection
-const mongoURL = process.env.MONGO_URL || "mongodb://mongodb:27017/chatbot";
+const mongoURL = process.env.MONGO_URL || "mongodb://mongo1:27017/chatbot";
 
 mongoose
   .connect(mongoURL)

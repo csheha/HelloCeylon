@@ -6,12 +6,10 @@ WORKDIR /python-service
 
 # Copy requirements first (for caching)
 COPY requirements.txt .
+COPY . .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy project files
-COPY . .
 
 # Expose FastAPI port
 EXPOSE 8000

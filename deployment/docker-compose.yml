@@ -21,7 +21,7 @@ services:
       - MONGO_URL=mongodb://mongodb:27017/chatbot
       - CHATBOT_URL=http://chatbot:8000/chat
     depends_on:
-      - mongodb
+#      - mongodb
       - chatbot
     restart: always
     networks:
@@ -51,20 +51,18 @@ services:
     networks:
       - app-network
 
-  mongodb:
-    image: mongo:7
-    container_name: chatbot_mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-    restart: always
-    networks:
-      - app-network
-
 volumes:
   mongo_data:
 
 networks:
   app-network:
     driver: bridge
+#  mongodb:
+#    image: mongo:7
+#    container_name: chatbot_mongodb
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - mongo_data:/data/db
+#    restart: always
+
